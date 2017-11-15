@@ -141,6 +141,7 @@ JET_SIDE_MENU_ITEMS = {
             {'name': 'actions', 'label': 'Actions'},
             {'name': 'intents', 'label': 'Intent'},
             {'name': 'stories', 'label': 'Stories'},
+            {'name': 'training', 'label': 'Train'},
         ]},
         {'label': ('Accounts'), 'app_label': 'auth', 'items': [
             {'name': 'user', 'label': 'Users'},
