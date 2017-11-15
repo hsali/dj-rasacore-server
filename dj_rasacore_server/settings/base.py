@@ -131,7 +131,7 @@ STATIC_URL = '/static/'
 
 
 # Jet Admin Settings
-# Admin Setting
+
 JET_DEFAULT_THEME = 'light-violet'
 
 JET_SIDE_MENU_COMPACT = True
@@ -142,7 +142,7 @@ JET_SIDE_MENU_ITEMS = {
             {'name': 'actions', 'label': 'Actions'},
             {'name': 'intents', 'label': 'Intent'},
             {'name': 'stories', 'label': 'Stories'},
-            {'name': 'training', 'label': 'Train'},
+            {'name': 'training', 'label': 'Training'},
         ]},
         {'label': ('Accounts'), 'app_label': 'auth', 'items': [
             {'name': 'user', 'label': 'Users'},
@@ -150,3 +150,7 @@ JET_SIDE_MENU_ITEMS = {
         ]},
     ],
 }
+
+# Training setting and files location
+
+TRAINING_DIR = os.path.join(BASE_DIR, 'trainingdump')
