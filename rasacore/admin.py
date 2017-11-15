@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-from mptt.admin import MPTTModelAdmin
+from mptt.admin import DraggableMPTTAdmin
 
 from .models import Intents, Actions, Stories, \
     IntentEntities, IntentUserSays
@@ -18,4 +18,4 @@ class IntentsAdmin(admin.ModelAdmin):
 
 admin.site.register(Intents, IntentsAdmin)
 admin.site.register(Actions)
-admin.site.register(Stories, MPTTModelAdmin)
+admin.site.register(Stories, DraggableMPTTAdmin)

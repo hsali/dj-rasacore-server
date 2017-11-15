@@ -31,6 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # Remove if you desire default django admin
+    'jet',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
