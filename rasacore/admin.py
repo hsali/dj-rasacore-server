@@ -23,12 +23,9 @@ class IntentsAdmin(admin.ModelAdmin):
 
 class StoriesAdmin(DraggableMPTTAdmin):
     inlines = [StoryActionsInline, ]
-
-class StoryActionsResponsesAdmin(admin.ModelAdmin):
-    list_display = ('id', 'story_action')
     
 admin.site.register(Intents, IntentsAdmin)
 admin.site.register(Actions)
-admin.site.register(StoryActionsResponses, StoryActionsResponsesAdmin)
+admin.site.register(StoryActionsResponses)
 admin.site.register(Stories, StoriesAdmin)
 admin.site.register(Training, SingletonModelAdmin)

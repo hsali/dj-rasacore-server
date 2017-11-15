@@ -78,6 +78,13 @@ class StoryActionsResponses(models.Model):
     story_action = models.ForeignKey(StoryActions, related_name='responses')
     text = models.CharField(max_length=240)
 
+    def __unicode__(self):
+        return "%s - %s" % (self.story_action.story, self.story_action.action)
+
+    class Meta:
+        verbose_name = 'Action response'
+        verbose_name_plural = 'Action responses'
+
 class Training(SingletonModel):
     PIPELINE_CHOICES = (
         ('spacy_sklearn', 'Spacy-Sklearn'), 
