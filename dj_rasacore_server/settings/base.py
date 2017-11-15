@@ -139,9 +139,10 @@ JET_SIDE_MENU_COMPACT = True
 JET_SIDE_MENU_ITEMS = {
     'admin': [
         {'label': ('Rasa Core'), 'app_label': 'rasacore', 'items': [
-            {'name': 'actions', 'label': 'Actions'},
             {'name': 'intents', 'label': 'Intent'},
+            {'name': 'actions', 'label': 'Actions'},
             {'name': 'stories', 'label': 'Stories'},
+            {'name': 'storyactionsresponses', 'label': 'Response Templates'},
             {'name': 'training', 'label': 'Training'},
         ]},
         {'label': ('Accounts'), 'app_label': 'auth', 'items': [

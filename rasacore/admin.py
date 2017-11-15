@@ -6,7 +6,8 @@ from solo.admin import SingletonModelAdmin
 from mptt.admin import DraggableMPTTAdmin
 
 from .models import Intents, Actions, Stories, \
-    IntentEntities, IntentUserSays, Training
+    IntentEntities, IntentUserSays, Training, \
+    StoryActions, StoryActionsResponses
 
 class IntentUserSaysInline(admin.StackedInline):
     model = IntentUserSays
@@ -14,10 +15,20 @@ class IntentUserSaysInline(admin.StackedInline):
 class IntentEntitiesInline(admin.StackedInline):
     model = IntentEntities
 
+class StoryActionsInline(admin.StackedInline):
+    model = StoryActions
+
 class IntentsAdmin(admin.ModelAdmin):
     inlines = [IntentEntitiesInline, IntentUserSaysInline, ]
 
+class StoriesAdmin(DraggableMPTTAdmin):
+    inlines = [StoryActionsInline, ]
+
+class StoryActionsResponsesAdmin(admin.ModelAdmin):
+    list_display = ('id', 'story_action')
+    
 admin.site.register(Intents, IntentsAdmin)
 admin.site.register(Actions)
-admin.site.register(Stories, DraggableMPTTAdmin)
+admin.site.register(StoryActionsResponses, StoryActionsResponsesAdmin)
+admin.site.register(Stories, StoriesAdmin)
 admin.site.register(Training, SingletonModelAdmin)

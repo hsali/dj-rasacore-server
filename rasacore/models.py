@@ -6,7 +6,7 @@ from mptt.models import MPTTModel, TreeForeignKey
 from solo.models import SingletonModel
 
 class Actions(models.Model):
-    name = models.CharField(max_length=70)
+    name = models.SlugField(max_length=70)
 
     def __unicode__(self):
         return self.name
@@ -16,7 +16,7 @@ class Actions(models.Model):
         verbose_name_plural = 'Actions'
 
 class Entities(models.Model):
-    name = models.CharField(max_length=70)
+    name = models.SlugField(max_length=70)
 
     def __unicode__(self):
         return self.name
@@ -26,7 +26,7 @@ class Entities(models.Model):
         verbose_name_plural = 'Entities'
 
 class Intents(models.Model):
-    name = models.CharField(max_length=70)
+    name = models.SlugField(max_length=70)
 
     def __unicode__(self):
         return self.name
@@ -58,7 +58,6 @@ class IntentUserSays(models.Model):
 class Stories(MPTTModel):
     title = models.CharField(max_length=70)
     intent = models.ForeignKey(Intents, related_name='stories')
-    actions = models.ForeignKey(Actions, related_name='stories')
 
     # Link stories together to create a path
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True)
@@ -70,6 +69,14 @@ class Stories(MPTTModel):
         order_insertion_by = ['title']
         verbose_name = 'Story'
         verbose_name_plural = 'Stories'
+
+class StoryActions(models.Model):
+    story = models.ForeignKey(Stories, related_name='actions')
+    action = models.ForeignKey(Actions, related_name='story_actions')
+
+class StoryActionsResponses(models.Model):
+    story_action = models.ForeignKey(StoryActions, related_name='responses')
+    text = models.CharField(max_length=240)
 
 class Training(SingletonModel):
     PIPELINE_CHOICES = (

@@ -9,7 +9,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         try:
             train_cls = Train()
-            train_cls.compose_files()
+            train_cls.run()
         except Exception as ex:
             raise CommandError('Error %s ' % str(ex))
 
