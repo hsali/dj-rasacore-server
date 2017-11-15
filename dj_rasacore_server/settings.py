@@ -127,3 +127,24 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# Jet Admin Settings
+# Admin Setting
+JET_DEFAULT_THEME = 'light-violet'
+
+JET_SIDE_MENU_COMPACT = True
+
+JET_SIDE_MENU_ITEMS = {
+    'admin': [
+        {'label': ('Rasa Core'), 'app_label': 'rasacore', 'items': [
+            {'name': 'actions', 'label': 'Actions'},
+            {'name': 'intents', 'label': 'Intent'},
+            {'name': 'stories', 'label': 'Stories'},
+        ]},
+        {'label': ('Accounts'), 'app_label': 'auth', 'items': [
+            {'name': 'user', 'label': 'Users'},
+            {'name': 'group', 'label': 'Groups'},
+        ]},
+    ],
+}
