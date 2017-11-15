@@ -65,6 +65,9 @@ class Train:
     def compose_domain_file(self):
         """
         Generate domain.yml file
+        
+        See:
+        Example of expected json output of a valid generated yalm file https://jsonformatter.org/b9c066
         """
         templates = {}
         responses = StoryActionsResponses.objects.all()

@@ -8,6 +8,12 @@ After designing your knowledge base, you need to train for it to take effect. Th
 
     python manage.py train
 
+
+## Test training
+   
+   # Check your trainingdump directory to confirm the exact YOUR_MODEL_DIRECTORY value
+   python -m rasa_core.run -d trainingdump/dialogue -u trainingdump/models/default/YOUR_MODEL_DIRECTORY/
+
 ## Todo list
 
 - Django admin modelling of NLU training
