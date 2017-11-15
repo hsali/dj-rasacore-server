@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     # Third party apps
     'mptt',
+    'solo',
 
     # Application level apps
     'rasacore',
