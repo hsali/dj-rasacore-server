@@ -10,11 +10,19 @@ class Actions(models.Model):
     def __unicode__(self):
         return self.name
 
+    class Meta:
+        verbose_name = 'Action'
+        verbose_name_plural = 'Actions'
+
 class Entities(models.Model):
     name = models.CharField(max_length=70)
 
     def __unicode__(self):
         return self.name
+
+    class Meta:
+        verbose_name = 'Entity'
+        verbose_name_plural = 'Entities'
 
 class Intents(models.Model):
     name = models.CharField(max_length=70)
@@ -22,10 +30,18 @@ class Intents(models.Model):
     def __unicode__(self):
         return self.name
 
+    class Meta:
+        verbose_name = 'Intent'
+        verbose_name_plural = 'Intents'
+
 class IntentEntities(models.Model):
     intent = models.ForeignKey(Intents, related_name='entities')
     entity = models.ForeignKey(Entities, related_name='intent_entities')
     value = models.CharField(max_length=140)
+
+    class Meta:
+        verbose_name = 'Intent Entity'
+        verbose_name_plural = 'Intent Entities'
 
 class IntentUserSays(models.Model):
     """
@@ -33,6 +49,10 @@ class IntentUserSays(models.Model):
     """
     intent = models.ForeignKey(Intents, related_name='usersays')
     text = models.CharField(max_length=240)
+
+    class Meta:
+        verbose_name = 'Intent User Say'
+        verbose_name_plural = 'Intent User Says'
 
 class Stories(MPTTModel):
     title = models.CharField(max_length=70)
@@ -47,3 +67,5 @@ class Stories(MPTTModel):
 
     class MPTTMeta:
         order_insertion_by = ['title']
+        verbose_name = 'Story'
+        verbose_name_plural = 'Stories'
