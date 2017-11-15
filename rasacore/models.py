@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from mptt.models import MPTTModel, TreeForeignKey
+from solo.models import SingletonModel
 
 class Actions(models.Model):
     name = models.CharField(max_length=70)
@@ -69,3 +70,15 @@ class Stories(MPTTModel):
         order_insertion_by = ['title']
         verbose_name = 'Story'
         verbose_name_plural = 'Stories'
+
+class Training(SingletonModel):
+    PIPELINE_CHOICES = (
+        ('spacy_sklearn', 'Spacy-Sklearn'), 
+    )
+    pipeline = models.CharField(max_length=70, choices=PIPELINE_CHOICES, default='spacy_sklearn')
+
+    def __unicode__(self):
+        return u"Training"
+
+    class Meta:
+        verbose_name = "Training"
