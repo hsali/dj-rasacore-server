@@ -31,9 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    # Remove if you desire default django admin
-    'jet',
-
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,6 +41,7 @@ INSTALLED_APPS = [
     # Third party apps
     'mptt',
     'solo',
+    'nested_admin',
 
     # Application level apps
     'rasacore',
@@ -128,31 +126,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-
-
-# Jet Admin Settings
-
-JET_DEFAULT_THEME = 'light-violet'
-
-JET_SIDE_MENU_COMPACT = True
-
-JET_SIDE_MENU_ITEMS = {
-    'admin': [
-        {'label': ('Rasa Core'), 'app_label': 'rasacore', 'items': [
-            {'name': 'intents', 'label': 'Intent'},
-            {'name': 'entities', 'label': 'Entities'},
-            {'name': 'intentusersays', 'label': 'User Says'},
-            {'name': 'storyactionsresponses', 'label': 'Response Templates'},
-            {'name': 'actions', 'label': 'Actions'},
-            {'name': 'stories', 'label': 'Stories'},
-            {'name': 'training', 'label': 'Training'},
-        ]},
-        {'label': ('Accounts'), 'app_label': 'auth', 'items': [
-            {'name': 'user', 'label': 'Users'},
-            {'name': 'group', 'label': 'Groups'},
-        ]},
-    ],
-}
 
 # Training setting and files location
 

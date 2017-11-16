@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import nested_admin
 from django.contrib import admin
 from solo.admin import SingletonModelAdmin
 from mptt.admin import DraggableMPTTAdmin
@@ -10,44 +11,49 @@ from .models import Intents, Actions, Stories, \
     StoryActions, StoryActionsResponses, ResponseButtons, \
     Entities
 
-class IntentUserSaysInline(admin.StackedInline):
-    model = IntentUserSays
-
-class IntentUserSaysEntitiesInline(admin.StackedInline):
+# Intent based admins
+class IntentUserSaysEntitiesInline(nested_admin.NestedTabularInline):
     model = IntentUserSaysEntities
     readonly_fields = ['start', 'end']
+    extra = 0
+    classes = ['collapse']
 
-class StoryActionsInline(admin.StackedInline):
-    model = StoryActions
+class IntentUserSaysInline(nested_admin.NestedStackedInline):
+    model = IntentUserSays
+    inlines = [IntentUserSaysEntitiesInline, ]
+    extra = 0
+    classes = ['collapse']
 
-class IntentsAdmin(admin.ModelAdmin):
+class IntentsAdmin(nested_admin.NestedModelAdmin):
     inlines = [IntentUserSaysInline, ]
 
-class StoriesAdmin(DraggableMPTTAdmin):
-    inlines = [StoryActionsInline, ]
-
-class IntentUserSaysAdmin(admin.ModelAdmin):
-    list_display = ['intent', 'text']
-    list_filter = ['intent', ]
-    search_fields = ['text', ]
-    inlines = [IntentUserSaysEntitiesInline, ]
-
-class ResponseButtonsInline(admin.TabularInline):
+# Stories admin
+class ResponseButtonsInline(nested_admin.NestedTabularInline):
     model = ResponseButtons
+    extra = 0
+    classes = ['collapse']
+
+class StoryActionsResponsesInline(nested_admin.NestedStackedInline):
+    model = StoryActionsResponses
+    inlines = [ResponseButtonsInline, ]
+    extra = 0
+    classes = ['collapse']
+
+class StoryActionsInline(nested_admin.NestedStackedInline):
+    model = StoryActions
+    inlines = [StoryActionsResponsesInline, ]
+    extra = 0
+    classes = ['collapse']
+
+class StoriesAdmin(nested_admin.NestedModelAdmin, DraggableMPTTAdmin):
+    inlines = [StoryActionsInline, ]
 
 class EntitiesAdmin(admin.ModelAdmin):
     list_display = ['name', ]
     search_fields = ['name', ]
 
-class StoryActionsResponsesAdmin(admin.ModelAdmin):
-    inlines = [ResponseButtonsInline, ]
-    list_filter = ['story_action', ]
-    search_fields = ['text', ]
-    
 admin.site.register(Intents, IntentsAdmin)
 admin.site.register(Actions)
-admin.site.register(StoryActionsResponses, StoryActionsResponsesAdmin)
-admin.site.register(IntentUserSays, IntentUserSaysAdmin)
 admin.site.register(Stories, StoriesAdmin)
 admin.site.register(Entities, EntitiesAdmin)
 admin.site.register(Training, SingletonModelAdmin)
