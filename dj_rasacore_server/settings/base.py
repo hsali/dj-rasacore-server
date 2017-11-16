@@ -131,3 +131,9 @@ STATIC_URL = '/static/'
 # Training setting and files location
 
 TRAINING_DIR = os.path.join(BASE_DIR, 'trainingdump')
+
+# Admin page setting
+
+GRAPPELLI_ADMIN_TITLE = 'Rasa Core Server'
+
+GRAPPELLI_ADMIN_TITLE = 'Rasa Core Server'
