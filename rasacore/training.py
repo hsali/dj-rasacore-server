@@ -13,25 +13,46 @@ from rasa_nlu.config import RasaNLUConfig
 from rasa_nlu.model import Trainer
 
 from .models import Intents, StoryActions, IntentUserSays, \
-    Stories, StoryActionsResponses
+    Stories, StoryActionsResponses, IntentUserSaysEntities, \
+    Entities
 
 class Train:
     TRAINING_DIR = settings.TRAINING_DIR
 
+    def split_synonyms(self, synonyms):
+        """
+        Split comma separated synonyms and return an array
+        """
+        try:
+            if synonyms:
+                return synonyms.split(',')
+            return []
+        except Exception as ex:
+            print(ex)
+            return []
+
     def get_training_data(self):
         # Compose training data from models
         common_examples = []
+        entity_synonyms = []
         user_says = IntentUserSays.objects.all()
         for user_say in user_says:
+            entities = [{ 'start': int(entity.start), 'end': int(entity.end), 'value': str(entity.value), 'entity': str(entity.entity.name) }\
+                 for entity in user_say.entities.all()]
             common_examples.append({
                 'text': user_say.text,
                 'intent': user_say.intent.name,
-                'entities': []
+                'entities': entities
             })
 
+        user_say_entities = IntentUserSaysEntities.objects.all()
+        entity_synonyms = [{'value': entity.value, 'synonyms': self.split_synonyms(entity.synonyms)} for entity in user_say_entities]
+
+        # Put everything together
         rasa_nlu_data = {
             'rasa_nlu_data': {
-                'common_examples': common_examples
+                'common_examples': common_examples,
+                'entity_synonyms': entity_synonyms
             }
         }
 
@@ -48,7 +69,16 @@ class Train:
         Open and write configuration to the provided file
         """
         configuration = {
-            'pipeline': 'spacy_sklearn'
+            'pipeline': [
+                'nlp_spacy', 
+                'tokenizer_spacy', 
+                'intent_entity_featurizer_regex', 
+                'intent_featurizer_spacy', 
+                'ner_crf', 
+                'ner_synonyms', 
+                'intent_classifier_sklearn', 
+                'ner_duckling'
+            ]
         }
         config_file = os.path.join(self.TRAINING_DIR, 'config_spacy.json')
         with open(config_file, 'w') as outfile:
@@ -74,13 +104,23 @@ class Train:
         for response in responses:
             response_temp = dict()
             action_name = str(response.story_action.action.name)
-            response_temp[action_name] = [{'text': str(response.text), 'buttons':[]}]
+            buttons = [{'title': str(button.title), 'payload': str(button.payload)} for button in response.buttons.all()]
+            response_temp[action_name] = [{'text': str(response.text), 'buttons':buttons}]
             templates.update(response_temp)
 
+        # Compose slots
+        entities = Entities.objects.all()
+        slots = {}
+        for entity in entities:
+            slots[str(entity.name)] = {'type': 'text'}
+
+        # Put everything together
         domain_data = {
             "intents": [str(intent.name) for intent in Intents.objects.all()],
             "actions": [str(story_action.action.name) for story_action in StoryActions.objects.all()],
-            "templates": templates
+            "templates": templates,
+            "entities": [str(entity.name) for entity in entities],
+            "slots": slots
         }
 
         domain_file = os.path.join(self.TRAINING_DIR, 'domain.yml')
@@ -97,9 +137,9 @@ class Train:
         story_string = ''
         for story in stories:
             story_string += '## %s\n' % story.title
-            story_string += '*_%s\n' % story.intent.name
+            story_string += '* _%s\n' % story.intent.name
             for action_item in story.actions.all():
-                story_string += '-%s\n' % action_item.action.name
+                story_string += '\t- %s\n' % action_item.action.name
             story_string += '\n'
         
         story_file = os.path.join(self.TRAINING_DIR, 'story.md')

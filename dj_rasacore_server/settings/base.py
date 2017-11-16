@@ -140,9 +140,11 @@ JET_SIDE_MENU_ITEMS = {
     'admin': [
         {'label': ('Rasa Core'), 'app_label': 'rasacore', 'items': [
             {'name': 'intents', 'label': 'Intent'},
+            {'name': 'entities', 'label': 'Entities'},
+            {'name': 'intentusersays', 'label': 'User Says'},
+            {'name': 'storyactionsresponses', 'label': 'Response Templates'},
             {'name': 'actions', 'label': 'Actions'},
             {'name': 'stories', 'label': 'Stories'},
-            {'name': 'storyactionsresponses', 'label': 'Response Templates'},
             {'name': 'training', 'label': 'Training'},
         ]},
         {'label': ('Accounts'), 'app_label': 'auth', 'items': [
