@@ -16,13 +16,11 @@ class IntentUserSaysEntitiesInline(nested_admin.NestedTabularInline):
     model = IntentUserSaysEntities
     readonly_fields = ['start', 'end']
     extra = 1
-    classes = ('grp-collapse grp-open',)
 
 class IntentUserSaysInline(nested_admin.NestedStackedInline):
     model = IntentUserSays
     inlines = [IntentUserSaysEntitiesInline, ]
     extra = 1
-    classes = ('grp-collapse grp-open',)
 
 class IntentsAdmin(nested_admin.NestedModelAdmin):
     inlines = [IntentUserSaysInline, ]
@@ -31,19 +29,16 @@ class IntentsAdmin(nested_admin.NestedModelAdmin):
 class ResponseButtonsInline(nested_admin.NestedTabularInline):
     model = ResponseButtons
     extra = 1
-    classes = ('grp-collapse grp-open',)
 
 class StoryActionsResponsesInline(nested_admin.NestedStackedInline):
     model = StoryActionsResponses
     inlines = [ResponseButtonsInline, ]
     extra = 1
-    classes = ('grp-collapse grp-open',)
 
 class StoryActionsInline(nested_admin.NestedStackedInline):
     model = StoryActions
     inlines = [StoryActionsResponsesInline, ]
     extra = 1
-    classes = ('grp-collapse grp-open',)
 
 class StoriesAdmin(nested_admin.NestedModelAdmin, DraggableMPTTAdmin):
     inlines = [StoryActionsInline, ]

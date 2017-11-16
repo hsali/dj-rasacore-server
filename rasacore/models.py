@@ -7,7 +7,7 @@ from solo.models import SingletonModel
 from django.db.models.signals import post_save
 
 class Actions(models.Model):
-    name = models.SlugField(max_length=70)
+    name = models.SlugField(max_length=70, unique=True)
 
     def __unicode__(self):
         return self.name
@@ -17,7 +17,7 @@ class Actions(models.Model):
         verbose_name_plural = 'Actions'
 
 class Entities(models.Model):
-    name = models.SlugField(max_length=70)
+    name = models.SlugField(max_length=70, unique=True)
 
     def __unicode__(self):
         return self.name
@@ -27,7 +27,7 @@ class Entities(models.Model):
         verbose_name_plural = 'Entities'
 
 class Intents(models.Model):
-    name = models.SlugField(max_length=70)
+    name = models.SlugField(max_length=70, unique=True)
 
     def __unicode__(self):
         return self.name

@@ -140,6 +140,14 @@ class Train:
             story_string += '* _%s\n' % story.intent.name
             for action_item in story.actions.all():
                 story_string += '\t- %s\n' % action_item.action.name
+
+            # Add children to the list
+            for descedant in story.get_descendants(include_self=False):
+                story_string += '* _%s\n' % descedant.intent.name
+                for action_item in descedant.actions.all():
+                    story_string += '\t- %s\n' % action_item.action.name
+            
+            # Break with new line to separate with new story
             story_string += '\n'
         
         story_file = os.path.join(self.TRAINING_DIR, 'story.md')
