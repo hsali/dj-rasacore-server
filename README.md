@@ -10,8 +10,9 @@ After designing your knowledge base, you need to train for it to take effect. Th
 
 
 ## Test training
-   
-   # Check your trainingdump directory to confirm the exact YOUR_MODEL_DIRECTORY value
+
+Check your trainingdump directory to confirm the exact **YOUR_MODEL_DIRECTORY** value
+
    python -m rasa_core.run -d trainingdump/dialogue -u trainingdump/models/default/YOUR_MODEL_DIRECTORY/
 
 ## Todo list
