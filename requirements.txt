@@ -21,6 +21,7 @@ cytoolz==0.8.2
 decorator==4.1.2
 dill==0.2.7.1
 Django==1.11.7
+django-grappelli==2.10.1
 django-jet==1.0.6
 django-mptt==0.8.7
 django-nested-admin==3.0.21
