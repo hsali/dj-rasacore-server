@@ -31,7 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,6 +42,7 @@ INSTALLED_APPS = [
     'mptt',
     'solo',
     'nested_admin',
+    'rest_framework',
 
     # Application level apps
     'rasacore',
@@ -131,9 +131,3 @@ STATIC_URL = '/static/'
 # Training setting and files location
 
 TRAINING_DIR = os.path.join(BASE_DIR, 'trainingdump')
-
-# Admin page setting
-
-GRAPPELLI_ADMIN_TITLE = 'Rasa Core Server'
-
-GRAPPELLI_ADMIN_TITLE = 'Rasa Core Server'

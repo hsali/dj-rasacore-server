@@ -15,5 +15,4 @@ class Chat:
 
     def handle_message(self, message):
         return self.agent.handle_message(message)
-
-# chat.agent.start_message_handling
+        

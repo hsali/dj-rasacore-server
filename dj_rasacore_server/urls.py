@@ -16,8 +16,11 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
+from rasacore import api as rasacore_api
+
 urlpatterns = [
-    url(r'^grappelli/', include('grappelli.urls')),
+    url(r'^api/chat/$', rasacore_api.chatView),
+
     url(r'^', admin.site.urls),
     url(r'^nested_admin/', include('nested_admin.urls')),
 ]
