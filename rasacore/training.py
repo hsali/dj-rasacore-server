@@ -116,10 +116,10 @@ class Train:
 
         # Put everything together
         domain_data = {
-            "intents": [str(intent.name) for intent in Intents.objects.all()],
-            "actions": [str(story_action.action.name) for story_action in StoryActions.objects.all()],
+            "intents": list(set([str(intent.name) for intent in Intents.objects.all()])),
+            "actions": list(set([str(story_action.action.name) for story_action in StoryActions.objects.all()])),
             "templates": templates,
-            "entities": [str(entity.name) for entity in entities],
+            "entities": list(set([str(entity.name) for entity in entities])),
             "slots": slots
         }
 
