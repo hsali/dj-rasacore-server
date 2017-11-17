@@ -7,6 +7,7 @@
 {% endblock %}
 
 {% block content %}
+{% verbatim %}
 <div class="container-fluid" id="trainingContainer">
     <div class="row full-height">
         <!-- Story list -->
@@ -19,22 +20,12 @@
                         </button>
                     </span>
                 </h4>
-                <ul class="list-unstyled component-list">
-                    <li>
-                        <a href="javascript:;">Order food</a>
-                    </li>
-                    <li>
-                        <a href="javascript:;">Greetings</a>
-                    </li>
-                    <li>
-                        <a href="javascript:;">Request support journey</a>
-                    </li>
-                </ul>
+                <story-list :stories="stories" :activestory.sync="active_story"></story-list>
             </div>
         </div>
 
         <!-- Intents list -->
-        <div class="col-md-2 full-height action-bg">
+        <div class="col-md-2 full-height action-bg" id="intentsList">
             <div class="content">
                 <h4>Intents
                     <span class="action">
@@ -43,14 +34,7 @@
                         </button>
                     </span>
                 </h4>
-                <ul class="list-unstyled component-list">
-                    <li>
-                        <a href="javascript:;">make_order</a>
-                    </li>
-                    <li>
-                        <a href="javascript:;">order_inquiry</a>
-                    </li>
-                </ul>
+                <intents-list :story="active_story"></intents-list>
             </div>
         </div>
 
@@ -150,7 +134,7 @@
         </div>
     </div>
 </div>
-
+{% endverbatim %}
 {% endblock %}
 
 {% block extra_scripts %}
@@ -175,4 +159,10 @@
         });
     } );
     </script>
+    
+    <!-- Add app scripts -->
+    <script src="{% static 'js/rasacore/intent-details.js' %}"></script>
+    <script src="{% static 'js/rasacore/intents.js' %}"></script>
+    <script src="{% static 'js/rasacore/stories.js' %}"></script>
+    <script src="{% static 'js/rasacore/training.js' %}"></script>
 {% endblock %}

@@ -18,6 +18,7 @@ class StoriesViewSet(viewsets.ModelViewSet):
 class IntentsViewSet(viewsets.ModelViewSet):
     queryset = Intents.objects.all()
     serializer_class = IntentsSer
+    filter_fields = ['story', ]
 
 
 # from .chat import Chat
