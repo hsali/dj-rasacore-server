@@ -1,0 +1,24 @@
+{
+  "name": "dj_rasacore_server",
+  "version": "1.0.0",
+  "description": "[Rasa Core](https://core.rasa.ai) uses yaml files to design conversation flow. I wanted a better way to visualize and handle large data sets during bot training and this is where this project comes handy.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/felixcheruiyot/dj-rasacore-server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/felixcheruiyot/dj-rasacore-server/issues"
+  },
+  "homepage": "https://github.com/felixcheruiyot/dj-rasacore-server#readme",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-less": "^3.3.2",
+    "gulp-watch": "^4.3.11"
+  }
+}

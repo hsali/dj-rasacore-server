@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="container-fluid" id="trainingContainer">
+    <div class="row full-height">
+        <!-- Story list -->
+        <div class="col-md-2 full-height secondary-bg">
+            <div class="content">
+                <h4>Stories</h4>
+                <ul class="list-unstyled component-list">
+                    <li>
+                        <a href="javascript:;">Order food</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">Greetings</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">Request support journey</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Intents list -->
+        <div class="col-md-2 full-height action-bg">
+            <div class="content">
+                <h4>Intents</h4>
+                <ul class="list-unstyled component-list">
+                    <li>
+                        <a href="javascript:;">make_order</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">order_inquiry</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- User says -->
+        <div class="col-md-4 full-height neutral-bg">
+            <div class="content">
+                <h4>User says examples</h4>
+                
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="col-md-4 full-height">
+            <div class="content">
+                <h4>Bot responses and actions</h4>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_scripts %}
+
+{% endblock %}

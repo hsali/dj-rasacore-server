@@ -19,8 +19,12 @@ from django.contrib import admin
 from rasacore import api as rasacore_api
 
 urlpatterns = [
+    # API URLs
     url(r'^api/chat/$', rasacore_api.chatView),
 
-    url(r'^', admin.site.urls),
+    # Page Views URLs
+    url(r'^', include('rasacore.urls')),
+
+    url(r'^admin/', admin.site.urls),
     url(r'^nested_admin/', include('nested_admin.urls')),
 ]

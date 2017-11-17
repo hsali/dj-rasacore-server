@@ -1,0 +1,113 @@
+.primary-bg {
+  background: #000100 !important;
+  color: #F8F8F8 !important;
+}
+.primary-bg a {
+  color: #F8F8F8 !important;
+  text-decoration: none !important;
+}
+.primary-bg a:hover,
+.primary-bg a:active,
+.primary-bg a:focus {
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+.secondary-bg {
+  background: #A1A6B4 !important;
+  color: #000100 !important;
+}
+.secondary-bg a {
+  color: #000100 !important;
+  text-decoration: none !important;
+}
+.secondary-bg a:hover,
+.secondary-bg a:active,
+.secondary-bg a:focus {
+  color: #001000 !important;
+  text-decoration: none !important;
+}
+.action-bg {
+  background: #B4D2E7 !important;
+  color: #000100 !important;
+}
+.action-bg a {
+  color: #000100 !important;
+  text-decoration: none !important;
+}
+.action-bg a:hover,
+.action-bg a:active,
+.action-bg a:focus {
+  color: #001000 !important;
+  text-decoration: none !important;
+}
+.success-bg {
+  background: #94C5CC !important;
+  color: #000100 !important;
+}
+.success-bg a {
+  color: #000100 !important;
+  text-decoration: none !important;
+}
+.success-bg a:hover,
+.success-bg a:active,
+.success-bg a:focus {
+  color: #001000 !important;
+  text-decoration: none !important;
+}
+.neutral-bg {
+  background: #F8F8F8 !important;
+  color: #000100 !important;
+}
+.neutral-bg a {
+  color: #000100 !important;
+  text-decoration: none !important;
+}
+.neutral-bg a:hover,
+.neutral-bg a:active,
+.neutral-bg a:focus {
+  color: #001000 !important;
+  text-decoration: none !important;
+}
+html,
+body {
+  height: 100%;
+}
+html .wrapper,
+body .wrapper {
+  height: 100%;
+}
+#trainingContainer {
+  height: 100%;
+}
+#trainingContainer .full-height {
+  height: 100%;
+}
+#trainingContainer .content {
+  padding: 21px 0;
+}
+#trainingContainer .content .component-list {
+  width: 100%;
+  padding: 0px !important;
+}
+#trainingContainer .content .component-list li {
+  padding: 11px 0;
+}
+#trainingContainer .content .component-list li:hover,
+#trainingContainer .content .component-list li:focus {
+  background: #000100 !important;
+  color: #F8F8F8 !important;
+}
+#trainingContainer .content .component-list li:hover a,
+#trainingContainer .content .component-list li:focus a {
+  color: #F8F8F8 !important;
+  text-decoration: none !important;
+}
+#trainingContainer .content .component-list li:hover a:hover,
+#trainingContainer .content .component-list li:focus a:hover,
+#trainingContainer .content .component-list li:hover a:active,
+#trainingContainer .content .component-list li:focus a:active,
+#trainingContainer .content .component-list li:hover a:focus,
+#trainingContainer .content .component-list li:focus a:focus {
+  color: #ffffff !important;
+  text-decoration: none !important;
+}

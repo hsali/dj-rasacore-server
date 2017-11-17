@@ -1,0 +1,33 @@
+.apply_bg(@color, @font_color){
+    // Apply background based on color provided
+    background: @color !important;
+    color: @font_color !important;
+    a {
+        color: @font_color !important;
+        text-decoration: none !important;
+        &:hover, &:active, &:focus {
+            color: lighten(@font_color, 3%) !important;
+            text-decoration: none !important;
+        }
+    }
+}
+
+.primary-bg {
+    .apply_bg(@primary, @neutral);
+}
+
+.secondary-bg {
+    .apply_bg(@secondary, @primary);
+}
+
+.action-bg {
+    .apply_bg(@action, @primary);
+}
+
+.success-bg {
+    .apply_bg(@success, @primary);
+}
+
+.neutral-bg {
+    .apply_bg(@neutral, @primary);
+}
