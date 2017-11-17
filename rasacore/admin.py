@@ -4,11 +4,10 @@ from __future__ import unicode_literals
 import nested_admin
 from django.contrib import admin
 from solo.admin import SingletonModelAdmin
-from mptt.admin import DraggableMPTTAdmin
 
 from .models import Intents, Actions, Stories, \
     IntentUserSaysEntities, IntentUserSays, Training, \
-    StoryActions, StoryActionsResponses, ResponseButtons, \
+    IntentActions, IntentActionsResponses, ResponseButtons, \
     Entities
 
 # Intent based admins
@@ -30,18 +29,22 @@ class ResponseButtonsInline(nested_admin.NestedTabularInline):
     model = ResponseButtons
     extra = 1
 
-class StoryActionsResponsesInline(nested_admin.NestedStackedInline):
-    model = StoryActionsResponses
+class IntentActionsResponsesInline(nested_admin.NestedStackedInline):
+    model = IntentActionsResponses
     inlines = [ResponseButtonsInline, ]
     extra = 1
 
-class StoryActionsInline(nested_admin.NestedStackedInline):
-    model = StoryActions
-    inlines = [StoryActionsResponsesInline, ]
+class IntentActionsInline(nested_admin.NestedStackedInline):
+    model = IntentActions
+    inlines = [IntentActionsResponsesInline, ]
     extra = 1
 
-class StoriesAdmin(nested_admin.NestedModelAdmin, DraggableMPTTAdmin):
-    inlines = [StoryActionsInline, ]
+class IntentsInline(nested_admin.NestedStackedInline):
+    model = Intents
+    inlines = [IntentActionsInline, ]
+
+class StoriesAdmin(nested_admin.NestedModelAdmin):
+    inlines = [IntentsInline, ]
 
 class EntitiesAdmin(admin.ModelAdmin):
     list_display = ['name', ]

@@ -12,8 +12,8 @@ from rasa_nlu.converters import load_data
 from rasa_nlu.config import RasaNLUConfig
 from rasa_nlu.model import Trainer
 
-from .models import Intents, StoryActions, IntentUserSays, \
-    Stories, StoryActionsResponses, IntentUserSaysEntities, \
+from .models import Intents, IntentActions, IntentUserSays, \
+    Stories, IntentActionsResponses, IntentUserSaysEntities, \
     Entities
 
 class Train:
@@ -100,10 +100,10 @@ class Train:
         Example of expected json output of a valid generated yalm file https://jsonformatter.org/b9c066
         """
         templates = {}
-        responses = StoryActionsResponses.objects.all()
+        responses = IntentActionsResponses.objects.all()
         for response in responses:
             response_temp = dict()
-            action_name = str(response.story_action.action.name)
+            action_name = str(response.intent_action.action.name)
             buttons = [{'title': str(button.title), 'payload': str(button.payload)} for button in response.buttons.all()]
             response_temp[action_name] = [{'text': str(response.text), 'buttons':buttons}]
             templates.update(response_temp)
@@ -117,7 +117,7 @@ class Train:
         # Put everything together
         domain_data = {
             "intents": list(set([str(intent.name) for intent in Intents.objects.all()])),
-            "actions": list(set([str(story_action.action.name) for story_action in StoryActions.objects.all()])),
+            "actions": list(set([str(intent_action.action.name) for intent_action in IntentActions.objects.all()])),
             "templates": templates,
             "entities": list(set([str(entity.name) for entity in entities])),
             "slots": slots
@@ -137,14 +137,10 @@ class Train:
         story_string = ''
         for story in stories:
             story_string += '## %s\n' % story.title
-            story_string += '* _%s\n' % story.intent.name
-            for action_item in story.actions.all():
-                story_string += '\t- %s\n' % action_item.action.name
-
-            # Add children to the list
-            for descedant in story.get_descendants(include_self=False):
-                story_string += '* _%s\n' % descedant.intent.name
-                for action_item in descedant.actions.all():
+            # Add intent and actions
+            for intent in story.intents.all():
+                story_string += '* _%s\n' % intent.name
+                for action_item in intent.actions.all():
                     story_string += '\t- %s\n' % action_item.action.name
             
             # Break with new line to separate with new story
@@ -173,56 +169,4 @@ class Train:
         self.compose_domain_file()
         self.compose_story_file()
         self.train_dialogue()
-
-    # def build_domain(self):
-    #     """
-    #     Create domains dict
-    #     """
-    #     return {
-    #         'intents': ['greet', 'goodbye'],
-    #         'templates': [
-    #             {
-    #                 'utter_greet': {
-    #                     'text': 'How are you',
-    #                     'buttons': [
-    #                         {'title': 'great', 'payload': 'great'},
-    #                         {'title': 'sad', 'payload': 'sad'}
-    #                     ]
-    #                 },
-    #                 'utter_cheerup': {
-    #                     'text': 'How are you',
-    #                     'buttons': [
-    #                         {'title': 'great', 'payload': 'great'},
-    #                         {'title': 'sad', 'payload': 'sad'}
-    #                     ]
-    #                 }
-    #             }
-    #         ],
-    #         'actions': ['utter_greet', 'utter_cheer_up']
-    #     }
-    
-    # def build_story(self):
-    #     return {
-    #         '##happy path': {"_greet": ["utter_greet"], "_mood_great": ["utter_happy", "utter_greet"]}
-    #     }
         
-    # def compose_files(self):
-    #     """
-    #     Collect data from django models and create training files as 
-    #     expected by core.rasa.ia commands
-        
-    #     Outputs: 
-    #         nlu_model_config.json
-    #         domains.yml
-    #         data/nlu.md
-    #         data/stories.md
-    #     """
-    #     domain = self.build_domain()
-    #     domain_file = os.path.join(settings.TRAINING_DIR, 'domain.yml')
-    #     with open(domain_file, 'w') as outfile:
-    #         yaml.dump(domain, outfile, default_flow_style=False)
-
-    #     story = self.build_story()
-    #     story_file = os.path.join(settings.TRAINING_DIR, 'story.md')
-    #     with open(story_file, 'w') as outfile:
-    #         yaml.dump(story, outfile, default_flow_style=False)

@@ -1,11 +1,29 @@
 from rest_framework.decorators import api_view
+from rest_framework import viewsets
 from rest_framework.response import Response
 
-# from .chat import Chat
+from .models import Actions, Entities, Intents, \
+    IntentUserSays, IntentUserSaysEntities, Stories, \
+    IntentActions, IntentActionsResponses, ResponseButtons, Training
 
-@api_view(http_method_names=['post', ])
-def chatView(request):
-    pass
+from .serializers import ActionsSer, EntitiesSer, IntentsSer, \
+    IntentUserSaysSer, IntentUserSaysEntitiesSer, StoriesSer, \
+    IntentActionsSer, IntentActionsResponsesSer, ResponseButtonsSer, \
+    TrainingSer
+
+class StoriesViewSet(viewsets.ModelViewSet):
+    queryset = Stories.objects.all()
+    serializer_class = StoriesSer
+
+class IntentsViewSet(viewsets.ModelViewSet):
+    queryset = Intents.objects.all()
+    serializer_class = IntentsSer
+
+
+# from .chat import Chat
+# @api_view(http_method_names=['post', ])
+# def chatView(request):
+#     pass
     # CHAT_AGENT = Chat()
 
     # message = request.data.get('message')

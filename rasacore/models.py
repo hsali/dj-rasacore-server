@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 
 from django.db import models
-from mptt.models import MPTTModel, TreeForeignKey
 from solo.models import SingletonModel
 from django.db.models.signals import post_save
 
@@ -26,8 +25,19 @@ class Entities(models.Model):
         verbose_name = 'Entity'
         verbose_name_plural = 'Entities'
 
+class Stories(models.Model):
+    title = models.CharField(max_length=70)
+
+    def __unicode__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Story'
+        verbose_name_plural = 'Stories'
+
 class Intents(models.Model):
     name = models.SlugField(max_length=70, unique=True)
+    story = models.ForeignKey(Stories, related_name="intents")
 
     def __unicode__(self):
         return self.name
@@ -60,41 +70,26 @@ class IntentUserSaysEntities(models.Model):
         verbose_name = 'User Says Entity'
         verbose_name_plural = 'User Says Entities'
 
-class Stories(MPTTModel):
-    title = models.CharField(max_length=70)
-    intent = models.ForeignKey(Intents, related_name='stories')
-
-    # Link stories together to create a path
-    parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True)
+class IntentActions(models.Model):
+    intent = models.ForeignKey(Intents, related_name='actions')
+    action = models.ForeignKey(Actions, related_name='intent_actions')
 
     def __unicode__(self):
-        return self.title
+        return "%s (%s)" % (self.action, self.intent)
 
-    class MPTTMeta:
-        order_insertion_by = ['title']
-        verbose_name = 'Story'
-        verbose_name_plural = 'Stories'
-
-class StoryActions(models.Model):
-    story = models.ForeignKey(Stories, related_name='actions')
-    action = models.ForeignKey(Actions, related_name='story_actions')
-
-    def __unicode__(self):
-        return "%s (%s)" % (self.action, self.story)
-
-class StoryActionsResponses(models.Model):
-    story_action = models.ForeignKey(StoryActions, related_name='responses')
+class IntentActionsResponses(models.Model):
+    intent_action = models.ForeignKey(IntentActions, related_name='responses')
     text = models.CharField(max_length=240)
 
     def __unicode__(self):
-        return '%s response' % self.story_action
+        return '%s response' % self.intent_action
 
     class Meta:
         verbose_name = 'Action response'
         verbose_name_plural = 'Action responses'
 
 class ResponseButtons(models.Model):
-    response = models.ForeignKey(StoryActionsResponses, related_name='buttons')
+    response = models.ForeignKey(IntentActionsResponses, related_name='buttons')
     title =  models.CharField(max_length=20)
     payload =  models.CharField(max_length=20)
 

@@ -15,12 +15,18 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from rest_framework import routers
 
 from rasacore import api as rasacore_api
 
+router = routers.DefaultRouter()
+router.register(r'stories', rasacore_api.StoriesViewSet)
+router.register(r'intents', rasacore_api.IntentsViewSet)
+
 urlpatterns = [
     # API URLs
-    url(r'^api/chat/$', rasacore_api.chatView),
+    url(r'^api/v1.0/', include(router.urls, namespace='v1.0')),
+    # url(r'^api/v1/chat/$', rasacore_api.chatView),
 
     # Page Views URLs
     url(r'^', include('rasacore.urls')),
