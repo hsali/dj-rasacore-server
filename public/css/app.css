@@ -111,3 +111,7 @@ body .wrapper {
   color: #ffffff !important;
   text-decoration: none !important;
 }
+#trainingContainer .content .tabular-list,
+#trainingContainer .content .accordion-list {
+  padding: 11px 0;
+}
