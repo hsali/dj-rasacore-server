@@ -23,8 +23,8 @@
         <div class="col-md-2 full-height action-bg" id="intentsList" v-show="story">
             <div class="content">
                 <section-header title="Intents" btnlabel="Add intent" :btnaction="showAddIntentModal"></section-header>
-                <add-story :start.sync="show_add_intent_modal"></add-story>
-                <intents-list :story="story" :intent.sync="intent"></intents-list>
+                <add-intent :start.sync="show_add_intent_modal" :intents.sync="intents" :intent.sync="intent" :story="story"></add-intent>
+                <intents-list :story="story" :intents.sync="intents" :intent.sync="intent"></intents-list>
             </div>
         </div>
 

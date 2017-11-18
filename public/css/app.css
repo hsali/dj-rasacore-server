@@ -115,6 +115,20 @@ body [v-cloak] {
   color: #001000 !important;
   text-decoration: none !important;
 }
+#trainingContainer .content .component-list li.active {
+  background: #A1A6B4 !important;
+  color: #000100 !important;
+}
+#trainingContainer .content .component-list li.active a {
+  color: #000100 !important;
+  text-decoration: none !important;
+}
+#trainingContainer .content .component-list li.active a:hover,
+#trainingContainer .content .component-list li.active a:active,
+#trainingContainer .content .component-list li.active a:focus {
+  color: #001000 !important;
+  text-decoration: none !important;
+}
 #trainingContainer .content .tabular-list,
 #trainingContainer .content .accordion-list {
   padding: 11px 0;

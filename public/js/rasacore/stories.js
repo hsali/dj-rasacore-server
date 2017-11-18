@@ -1,7 +1,7 @@
 var storyListTemp = `
     <ul class="list-unstyled component-list">
-        <li v-for="story in stories" @click="openStory(story.id)">
-            <a href="javascript:;">{{story.title}}</a>
+        <li v-for="item in stories" @click="openStory(item.id)" v-bind:class="{'active': (item.id==story)}">
+            <a href="javascript:;">{{item.title}}</a>
         </li>
     </ul>`;
 
