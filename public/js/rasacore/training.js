@@ -9,7 +9,17 @@ var Training = new Vue({
                 count: 0,
                 next: false,
                 prev: false
-            }
+            },
+            // Handle modals
+            show_add_story_modal: false,
+            show_add_intent_modal: false,
+            show_add_example_modal: false,
+            show_add_action_modal: false
+        }
+    },
+    watch: {
+        'story': function() {
+            this.intent = null;
         }
     },
     created: function() {
@@ -31,6 +41,18 @@ var Training = new Vue({
                 App.notifyUser(err, "error");
                 App.hideProcessing()
             });
+        },
+        showAddStoryModal: function(){
+            this.show_add_story_modal = true
+        },
+        showAddIntentModal: function(){
+            this.show_add_intent_modal = true
+        },
+        showAddExampleModal: function(){
+            this.show_add_example_modal = true
+        },
+        showAddActionModal: function(){
+            this.show_add_action_modal = true
         }
     }
 })

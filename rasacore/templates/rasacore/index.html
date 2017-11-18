@@ -13,13 +13,8 @@
         <!-- Story list -->
         <div class="col-md-2 full-height primary-bg">
             <div class="content">
-                <h4>Stories
-                    <span class="action">
-                        <button class="btn btn-primary btn-xs">
-                            <i class="fa fa-plus-circle"></i> Add story
-                        </button>
-                    </span>
-                </h4>
+                <section-header title="Stories" btnlabel="Add story" :btnaction="showAddStoryModal"></section-header>
+                <add-story :start.sync="show_add_story_modal" :stories.sync="stories" :story.sync="story"></add-story>
                 <story-list :stories="stories" :story.sync="story"></story-list>
             </div>
         </div>
@@ -27,13 +22,8 @@
         <!-- Intents list -->
         <div class="col-md-2 full-height action-bg" id="intentsList" v-show="story">
             <div class="content">
-                <h4>Intents
-                    <span class="action">
-                        <button class="btn btn-primary btn-xs">
-                            <i class="fa fa-plus-circle"></i> Add intent
-                        </button>
-                    </span>
-                </h4>
+                <section-header title="Intents" btnlabel="Add intent" :btnaction="showAddIntentModal"></section-header>
+                <add-story :start.sync="show_add_intent_modal"></add-story>
                 <intents-list :story="story" :intent.sync="intent"></intents-list>
             </div>
         </div>
@@ -41,14 +31,8 @@
         <!-- User says -->
         <div class="col-md-4 full-height neutral-bg" v-show="story && intent">
             <div class="content">
-                <h4>User says examples
-                    <span class="action">
-                        <button class="btn btn-primary btn-xs">
-                            <i class="fa fa-plus-circle"></i> Add example
-                        </button>
-                    </span>
-                </h4>
-
+                <section-header title="User says examples" btnlabel="Add example" :btnaction="showAddExampleModal"></section-header>
+                <add-story :start.sync="show_add_example_modal"></add-story>
                 <user-says :intent="intent"></user-says>
             </div>
         </div>
@@ -56,13 +40,8 @@
         <!-- Actions -->
         <div class="col-md-4 full-height" v-show="story && intent">
             <div class="content">
-                <h4>Bot responses and actions
-                    <span class="action">
-                        <button class="btn btn-primary btn-xs">
-                            <i class="fa fa-plus-circle"></i> Add action
-                        </button>
-                    </span>
-                </h4>
+                <section-header title="Bot responses and actions" btnlabel="Add action" :btnaction="showAddActionModal"></section-header>
+                <add-story :start.sync="show_add_action_modal"></add-story>
                 <div class="accordion-list">
                     <actions-list :intent="intent"></actions-list>
                 </div>
@@ -74,9 +53,11 @@
 {% endblock %}
 
 {% block extra_scripts %}
+<script src="https://cdn.rawgit.com/wffranco/vue-strap/7becab2b/dist/vue-strap.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     
 <!-- Add app scripts -->
+<script src="{% static 'js/rasacore/utilities.js' %}"></script>
 <script src="{% static 'js/rasacore/intent-actions.js' %}"></script>
 <script src="{% static 'js/rasacore/user-says.js' %}"></script>
 <script src="{% static 'js/rasacore/intents.js' %}"></script>
