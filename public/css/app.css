@@ -90,15 +90,16 @@ body [v-cloak] {
   padding: 21px 0;
 }
 #trainingContainer .content .component-list {
-  width: 100%;
   padding: 0px !important;
+  margin-left: -15px;
+  margin-right: -15px;
 }
 #trainingContainer .content .component-list li {
-  padding: 11px 0;
+  padding: 11px 15px;
 }
 #trainingContainer .content .component-list li:hover,
 #trainingContainer .content .component-list li:focus {
-  background: #A1A6B4 !important;
+  background: #F8F8F8 !important;
   color: #000100 !important;
 }
 #trainingContainer .content .component-list li:hover a,
@@ -116,7 +117,7 @@ body [v-cloak] {
   text-decoration: none !important;
 }
 #trainingContainer .content .component-list li.active {
-  background: #A1A6B4 !important;
+  background: #F8F8F8 !important;
   color: #000100 !important;
 }
 #trainingContainer .content .component-list li.active a {
