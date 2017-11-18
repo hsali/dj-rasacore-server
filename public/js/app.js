@@ -115,16 +115,10 @@ var App = (function () {
                 $.unblockUI();
             }
         },
-        notifyUser: function (message, type, layout) {
-            // var layout = layout || 'bottomRight';
-            // var type = (type === 'error')? 'danger': type;
-            // $.notify({
-            // 	icon: 'pe-7s-gift',
-            // 	message: message
-            // },{
-            //     type: type,
-            //     timer: 0
-            // });
+        notifyUser: function (message, message_type, position) {
+            var position = position || 'right';
+            var message_type = message_type || 'success';
+            $.notify(message, {position: position, className: message_type});
         },
         confirmAlert: function (message, okCallback) {
 

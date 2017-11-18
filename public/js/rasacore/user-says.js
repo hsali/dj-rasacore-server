@@ -106,9 +106,10 @@ Vue.component('addUsersay', {
                 self.form.text = '';
                 // Close modal
                 self.$emit('update:start', false);
-                App.hideProcessing()
+                App.hideProcessing();
+                App.notifyUser('User say added');
             }, function(err){
-                App.notifyUser(err, "error");
+                App.notifyUser(err.responseText, "error");
                 App.hideProcessing()
             });
             

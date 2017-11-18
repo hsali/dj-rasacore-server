@@ -123,9 +123,10 @@ Vue.component('addAction', {
                 self.form.action = '';
                 // Close modal
                 self.$emit('update:start', false);
-                App.hideProcessing()
+                App.hideProcessing();
+                App.notifyUser('Action added');
             }, function(err){
-                App.notifyUser(err, "error");
+                App.notifyUser(err.responseText, "error");
                 App.hideProcessing()
             });
             

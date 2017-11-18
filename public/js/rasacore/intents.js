@@ -99,10 +99,11 @@ Vue.component('addIntent', {
                 self.form.name = '';
                 // Close modal
                 self.$emit('update:start', false);
-                App.hideProcessing()
+                App.hideProcessing();
+                App.notifyUser('Intent added');
             }, function(err){
-                App.notifyUser(err, "error");
-                App.hideProcessing()
+                App.notifyUser(err.responseText, "error");
+                App.hideProcessing();
             });
             
         },

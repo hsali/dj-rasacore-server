@@ -67,9 +67,10 @@ Vue.component('addStory', {
                 self.form.title = '';
                 // Close modal
                 self.$emit('update:start', false);
-                App.hideProcessing()
+                App.hideProcessing();
+                App.notifyUser('Story added');
             }, function(err){
-                App.notifyUser(err, "error");
+                App.notifyUser(err.responseText, "error");
                 App.hideProcessing()
             });
             
