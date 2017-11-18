@@ -32,8 +32,8 @@
         <div class="col-md-4 full-height neutral-bg" v-show="story && intent">
             <div class="content">
                 <section-header title="User says examples" btnlabel="Add example" :btnaction="showAddExampleModal"></section-header>
-                <add-story :start.sync="show_add_example_modal"></add-story>
-                <user-says :intent="intent"></user-says>
+                <add-usersay :start.sync="show_add_example_modal" :usersays.sync="usersays" :intent="intent"></add-usersay>
+                <user-says :intent="intent" :usersays.sync="usersays"></user-says>
             </div>
         </div>
 
@@ -41,9 +41,9 @@
         <div class="col-md-4 full-height" v-show="story && intent">
             <div class="content">
                 <section-header title="Bot responses and actions" btnlabel="Add action" :btnaction="showAddActionModal"></section-header>
-                <add-story :start.sync="show_add_action_modal"></add-story>
+                <add-action :start.sync="show_add_action_modal" :actions.sync="actions" :intent="intent"></add-action>
                 <div class="accordion-list">
-                    <actions-list :intent="intent"></actions-list>
+                    <actions-list :intent="intent" :actions.sync="actions"></actions-list>
                 </div>
             </div>
         </div>

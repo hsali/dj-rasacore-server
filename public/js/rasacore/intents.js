@@ -90,7 +90,7 @@ Vue.component('addIntent', {
             App.remotePost('/api/v1.0/intents/', self.form, 
             function(res){
                 self.show_modal = false;
-                // Update stories
+                // Update intents
                 var intents = self.intents;
                 intents.unshift(res);
                 self.$emit('update:intents', intents);

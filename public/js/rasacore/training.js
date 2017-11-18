@@ -6,6 +6,8 @@ var Training = new Vue({
             intent: null,
             intents: [],
             stories: [],
+            usersays: [],
+            actions: [],
             pagination: {
                 count: 0,
                 next: false,
