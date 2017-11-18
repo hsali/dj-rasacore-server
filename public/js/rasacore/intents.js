@@ -1,13 +1,13 @@
 var intentsListTemp = `
 <ul class="list-unstyled component-list">
-    <li v-for="intent in intents">
+    <li v-for="intent in intents" @click="openIntent(intent.id)">
         <a href="javascript:;">{{intent.name}}</a>
     </li>
 </ul>`;
 
 Vue.component('intentsList', {
     template: intentsListTemp,
-    props: ['story'],
+    props: ['story', 'intent'],
     data: function(){
         return {
             intents: [],
@@ -39,6 +39,9 @@ Vue.component('intentsList', {
                 App.notifyUser(err, "error");
                 App.hideProcessing()
             });   
+        },
+        openIntent: function(id) {
+            this.$emit('update:intent', id)
         }
     }
 });

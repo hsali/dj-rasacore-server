@@ -76,6 +76,10 @@ html .wrapper,
 body .wrapper {
   height: 100%;
 }
+html [v-cloak],
+body [v-cloak] {
+  display: none;
+}
 #trainingContainer {
   height: 100%;
 }

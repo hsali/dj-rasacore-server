@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'solo',
     'nested_admin',
     'rest_framework',
+    'django_filters',
 
     # Application level apps
     'rasacore',
@@ -160,14 +161,15 @@ REST_FRAMEWORK = {
         'anon': '100/hour',
         'user': '600/hour'
     },
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+        'rest_framework.filters.SearchFilter',
+    ),
     # TODO: Add API authentication
     # 'DEFAULT_AUTHENTICATION_CLASSES': (
     #     'rest_framework.authentication.BasicAuthentication',
     #     'rest_framework.authentication.SessionAuthentication'
     # ),
-    # 'DEFAULT_FILTER_BACKENDS': (
-    #     'rest_framework_filters.backends.DjangoFilterBackend',
-    #     'rest_framework.filters.SearchFilter',
-    # ),
+    
 }
 

@@ -2,7 +2,8 @@ var Training = new Vue({
     el: "#trainingContainer",
     data: function() {
         return {
-            active_story: null,
+            story: null,
+            intent: null,
             stories: [],
             pagination: {
                 count: 0,

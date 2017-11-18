@@ -21,7 +21,12 @@ Vue.component('userSays', {
     template: userSaysTemplateStr,
     data: function() {
         return {
-            user_says: []
+            user_says: [],
+            pagination: {
+                count: 0,
+                next: false,
+                prev: false
+            }
         }
     },
     watch: {

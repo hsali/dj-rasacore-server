@@ -22,6 +22,8 @@ from rasacore import api as rasacore_api
 router = routers.DefaultRouter()
 router.register(r'stories', rasacore_api.StoriesViewSet)
 router.register(r'intents', rasacore_api.IntentsViewSet)
+router.register(r'user-says', rasacore_api.IntentUserSaysViewSet)
+router.register(r'intent-actions', rasacore_api.IntentActionsViewSet)
 
 urlpatterns = [
     # API URLs

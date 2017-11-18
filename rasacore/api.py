@@ -20,6 +20,17 @@ class IntentsViewSet(viewsets.ModelViewSet):
     serializer_class = IntentsSer
     filter_fields = ['story', ]
 
+class IntentUserSaysViewSet(viewsets.ModelViewSet):
+    queryset = IntentUserSays.objects.all()
+    serializer_class = IntentUserSaysSer
+    filter_fields = ['intent', ]
+
+class IntentActionsViewSet(viewsets.ModelViewSet):
+    queryset = IntentActions.objects.all()
+    serializer_class = IntentActionsSer
+    filter_fields = ['intent', ]
+
+
 
 # from .chat import Chat
 # @api_view(http_method_names=['post', ])

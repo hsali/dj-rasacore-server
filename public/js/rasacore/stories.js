@@ -6,11 +6,11 @@ var storyListTemp = `
     </ul>`;
 
 Vue.component('storyList', {
-    props: ['stories', 'activestory'],
+    props: ['stories', 'story'],
     template: storyListTemp,
     methods: {
         openStory: function(id) {
-            this.$emit('update:activestory', id)
+            this.$emit('update:story', id)
         }
     }
 });
